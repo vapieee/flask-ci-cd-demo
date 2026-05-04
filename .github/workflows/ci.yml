@@ -27,16 +27,4 @@ jobs:
 
       - name: Build Docker Image
         run: docker build -t flask-ci-cd-demo .
-
-      - name: Deploy To Server
-        uses: appleboy/ssh-action@v1.0.3
-        with:
-          host: ${{ secrets.SERVER_HOST }}
-          username: ${{ secrets.SERVER_USER }}
-          key: ${{ secrets.SERVER_SSH_KEY }}
-          script: |
-            echo "Deployment started"
-            docker stop flask-ci-cd-demo || true
-            docker rm flask-ci-cd-demo || true
-            docker run -d -p 5000:5000 --name flask-ci-cd-demo flask-ci-cd-demo
-            echo "Deployment finished"
+ 
